@@ -1,0 +1,108 @@
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+@function breakpoints($breakpoint) {
+  @return map-get($grid-breakpoints, $breakpoint);
+}
+
+@function font($font-name) {
+  @return map-get($fonts, $font-name);
+}
+
+$grid-breakpoints: (
+  xxs: 360px,
+  xs: 480px,
+  sm: 768px,
+  smplus: 769px,
+  md: 992px,
+  lg: 1024px,
+  xl: 1200px,
+  xxl: 1480px,
+  xxxl: 1650px,
+);
+
+@mixin min-xxxl {
+  @media screen and (min-width: #{breakpoints(xxxl)}) {
+    @content;
+  }
+}
+
+@mixin min-xxl {
+  @media screen and (min-width: #{breakpoints(xxl)}) {
+    @content;
+  }
+}
+
+@mixin min-xl {
+  @media screen and (min-width: #{breakpoints(xl)}) {
+    @content;
+  }
+}
+
+@mixin min-lg {
+  @media screen and (min-width: #{breakpoints(lg)}) {
+    @content;
+  }
+}
+
+@mixin min-md {
+  @media (min-width: #{breakpoints(md)}) {
+    @content;
+  }
+}
+
+@mixin min-sm {
+  @media (min-width: #{breakpoints(sm)}) {
+    @content;
+  }
+}
+
+@mixin min-xs {
+  @media screen and (min-width: #{breakpoints(xs)}) {
+    @content;
+  }
+}
+
+@mixin min-xxs {
+  @media screen and (min-width: #{breakpoints(xxs)}) {
+    @content;
+  }
+}
+
+@mixin max-sm {
+  @media (max-width: #{breakpoints(sm)}) {
+    @content;
+  }
+}
+
+@mixin scrollbar {
+  @include min-lg {
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #c8dff5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #fb6262;
+    }
+
+    // &::-webkit-scrollbar,
+    // &::-webkit-scrollbar-track,
+    // &::-webkit-scrollbar-thumb {
+    //   visibility: hidden;
+    // }
+
+    &:hover {
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-track,
+      &::-webkit-scrollbar-thumb {
+        visibility: visible;
+      }
+    }
+  }
+}

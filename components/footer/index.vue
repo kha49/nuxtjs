@@ -1,17 +1,17 @@
 <template>
-  <div class="footer">
+  <div class="footer tw-bg-grey-100 tw-py-8">
     <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-md-3">
+      <Container>
+        <div class="tw-grid tw-grid-cols-6 tw-gap-4">
+          <div class="tw-col-start-1 tw-col-end-7 md:tw-col-start-1 md:tw-col-end-2">
             <div class="logo">
               <img src="~/assets/images/Logo-Safin-02.png" alt="Logo">
             </div>
           </div>
-          <div class="col-xs-12 col-md-9">
-            <div class="row">
-              <div class="col-xs-12 col-md-3">
-                <div class="footer__title">
+          <div class="tw-col-start-1 tw-col-end-7 md:tw-col-start-2 md:tw-col-end-7">
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-2">
+              <div>
+                <div class="footer__title tw-font-bold">
                   Sản phẩm
                 </div>
                 <div class="footer__list">
@@ -23,8 +23,8 @@
                   </nuxt-link>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-3">
-                <div class="footer__title">
+              <div>
+                <div class="footer__title tw-font-bold">
                   Về Safin
                 </div>
                 <div class="footer__list">
@@ -45,8 +45,8 @@
                   </nuxt-link>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-3">
-                <div class="footer__title">
+              <div>
+                <div class="footer__title tw-font-bold">
                   Dịch vụ
                 </div>
                 <div class="footer__list">
@@ -64,8 +64,8 @@
                   </nuxt-link>
                 </div>
               </div>
-              <div class="col-xs-12 col-md-3">
-                <div class="footer__title">
+              <div>
+                <div class="footer__title tw-font-bold">
                   Liên kết
                 </div>
                 <div class="footer__list">
@@ -89,7 +89,7 @@
         <p class="all-right">
           © 2020 Safin. All rights reserved
         </p>
-      </div>
+      </Container>
     </footer>
   </div>
 </template>
@@ -101,31 +101,4 @@ export default {
 </script>
 
 <style lang="scss">
-.footer {
-  padding: 100px 0;
-  background-color: $gray-light;
-
-  .logo {
-    img {
-      width: 150px;
-    }
-  }
-
-  &__title {
-    font-size: 16px;
-    font-family: $font-main;
-    font-weight: bold;
-    margin-bottom: 25px;
-    color: $black;
-  }
-
-  &__list {
-    margin-bottom: 120px;
-
-    a {
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-}
 </style>

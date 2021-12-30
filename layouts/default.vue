@@ -1,9 +1,9 @@
 <template>
-  <div class="app">
+  <v-app>
     <Header />
-      <nuxt />
+    <nuxt />
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -17,6 +17,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import '../assets/scss/global.scss';
 </style>

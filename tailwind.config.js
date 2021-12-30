@@ -123,8 +123,9 @@ module.exports = {
       none: 'none'
     },
     fontFamily: {
-      'khmer-main': 'Nato-Khmer-Regular, sans-serif',
-      'khmer-bold': 'Nato-Khmer-Bold, sans-serif'
+      futura: 'SFU futura, sans-serif',
+      'futura-bold': 'SFU futura bold, sans-serif',
+      SVN: 'SVN product regular, sans-serif'
     },
     extend: {}
   },

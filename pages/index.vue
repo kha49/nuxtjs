@@ -1,62 +1,82 @@
 <template>
-  <div class="homepage">
-    <Banner :banners="homepageData.Banners" :issuing-organizations="homepageData.IssuingOrganizations" />
-    <div style="width: 100%; height: 30px">
-      <nuxt-link :to="`product-detail/0514eec7-aea2-4fd6-ae8d-c5260030d55c`"> clcik </nuxt-link>
-    </div>
-    <Feature />
-    <product-list :products="homepageData.Products" />
-    <TalkAboutUs :partner-reviews="homepageData.PartnerReviews" />
-    <achievement />
-    <TypicalPartner :partners="homepageData.Partners" />
+  <div class="homepage tw-py-10">
+    <Container>
+      <app-button color="primary">
+        Button
+      </app-button>
+      <app-input
+        v-model="rePassword"
+        name="rePassword"
+        label="Re Password"
+        is-password
+        :error-message="rePasswordErrMessage"
+        :type="reInputType"
+        @onToggleEyes="onToggleEyes"
+        @keyup="$v.rePassword.$touch()"
+      />
+    </Container>
   </div>
 </template>
 
 <script>
-// component
-import Feature from '@/components/feature'
-import ProductList from '@/components/product'
-import Banner from '@/components/banner/homepage'
-import Achievement from '@/components/achievement'
-import TypicalPartner from '@/components/typicalPartner'
-import TalkAboutUs from '@/components/talkAboutUs'
-
-// services
-import HomeServices from '@/services/modules/homeServices'
+import { mapActions } from 'vuex'
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   name: 'Homepage',
-  components: {
-    Feature,
-    ProductList,
-    Banner,
-    Achievement,
-    TypicalPartner,
-    TalkAboutUs
-  },
   data () {
     return {
-      homepageData: {}
+      homepageData: {},
+      rePassword: '',
+      reInputType: 'password'
     }
   },
-  async fetch () {
-    await this.getDataHomepage()
+
+  computed: {
+    rePasswordErrMessage () {
+      if (!this.$v.rePassword.required && this.$v.rePassword.$dirty) {
+        return 'Please enter re password'
+      }
+
+      if (!this.$v.rePassword.minLength && this.$v.rePassword.$dirty) {
+        return 'Min length of password is 5'
+      }
+      return ''
+    }
   },
+  created () {
+    this.getDataHomepage() // or this.getData()
+  },
+
+  validations: {
+    rePassword: {
+      required,
+      minLength: minLength(5)
+    }
+  },
+
   methods: {
+    ...mapActions({
+      getData: 'homePage/getAll'
+    }),
+
     async getDataHomepage () {
       try {
-        const homepage = await HomeServices.getAll()
+        const homepage = await this.$repo.home.getAll()
         if (homepage) {
           this.homepageData = homepage.data.Data
         }
-      } catch (error) {
+      } catch (error) {}
+    },
 
+    onToggleEyes () {
+      if (this.reInputType === 'password') {
+        this.reInputType = 'text'
+      } else {
+        this.reInputType = 'password'
       }
     }
   }
 }
 </script>
 <style lang="scss">
-.homepage {
-  background-color: $gray-light;
-}
 </style>

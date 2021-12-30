@@ -1,0 +1,45 @@
+@import 'fonts';
+
+html,
+body {
+  font-family: 'SFU futura', sans-serif;
+}
+
+.v-application {
+  font-family: 'SFU futura', sans-serif;
+
+  &--wrap {
+    overflow: hidden;
+  }
+
+  a {
+    color: #007aff;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
+input {
+  &:disabled {
+    background-color: #f0f0f0;
+    color: #a2a0a0;
+  }
+}
+
+textarea {
+  min-height: 30px;
+  padding: 10px;
+  border: 1px solid #c5c5c5;
+  border-radius: 8px;
+  width: 100%;
+  background: white;
+  outline: none;
+  &:focus {
+    border: 1px solid #777576;
+  }
+}
+
+.v-avatar {
+  overflow: initial !important;
+}

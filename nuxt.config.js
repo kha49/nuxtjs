@@ -1,11 +1,11 @@
-// const result = require('dotenv').config({
-//   path: process.env.NODE_ENV
-//     ? `env/.env.${process.env.NODE_ENV}`
-//     : 'env/.env.development'
-// })
-// if (result.error) {
-//   throw result.error
-// }
+const result = require('dotenv').config({
+  path: process.env.NODE_ENV
+    ? `env/.env.${process.env.NODE_ENV}`
+    : 'env/.env.development'
+})
+if (result.error) {
+  throw result.error
+}
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -28,7 +28,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'element-ui/lib/theme-chalk/index.css',
     'vue-slick-carousel/dist/vue-slick-carousel.css',
     'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
   ],
@@ -42,16 +41,21 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui',
-    '@/plugins/vue-slick-carousel'
+    '@/plugins/vue-slick-carousel',
+    '@/plugins/axios',
+    '@/plugins/repositories',
+    '@/plugins/vuelidate'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components/common'
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
+    '@nuxtjs/vuetify',
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss'
   ],
@@ -60,15 +64,48 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }]
   ],
 
+  vuetify: {
+    treeShake: true,
+    theme: {
+      dark: false,
+      themes: {
+        light: {
+          primary: '#ff0000',
+          secondary: '#231f20',
+          success: '#07b53b',
+          danger: '#ff0000',
+          warning: '#ffd60a',
+          info: '#007aff',
+          dark: '#242939',
+          black: '#242939',
+          background: '#f2f3f8',
+          color: '#0F3460',
+          grey: '#c5c5c5'
+        }
+      }
+    }
+  },
+
   styleResources: {
-    scss: [
-      '~/assets/css/app.scss',
-      '~/assets/css/_variables.scss',
-      '~/assets/css/_breakpoints.scss'
-    ]
+    scss: ['~/assets/scss/_mixins.scss']
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          required: false,
+          type: false
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' }
+        }
+      }
+    }
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -76,7 +113,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/^element-ui/],
     extractCSS: {
       ignoreOrder: true // minify css
     },
