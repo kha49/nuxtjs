@@ -1,3 +1,12 @@
+// const result = require('dotenv').config({
+//   path: process.env.NODE_ENV
+//     ? `env/.env.${process.env.NODE_ENV}`
+//     : 'env/.env.development'
+// })
+// if (result.error) {
+//   throw result.error
+// }
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -24,6 +33,13 @@ export default {
     'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
   ],
 
+  // env
+  env: {
+    NODE_ENV: process.env.NODE_ENV,
+    BASE_URL: process.env.BASE_URL,
+    API_URL: process.env.API_URL
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui',
@@ -36,7 +52,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,6 +76,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/^element-ui/]
+    transpile: [/^element-ui/],
+    extractCSS: {
+      ignoreOrder: true // minify css
+    },
+    optimizeCSS: true,
+    babel: {
+      plugins: ['@babel/plugin-proposal-optional-chaining'] // optional-chaining
+    }
   }
 }
